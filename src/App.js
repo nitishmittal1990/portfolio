@@ -7,10 +7,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className='myInfo'>
-          <div>
-            <h1>Nitish Mittal</h1>
-            <p>Full Stack Developer</p>
-          </div>
+          <h1>Nitish Mittal</h1>
+          <p>Full Stack Developer</p>
         </div>
       </header>
     </div>
