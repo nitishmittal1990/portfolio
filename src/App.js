@@ -1,18 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
+
+import Navbar from './components/Navbar.js'
 import './App.css';
+
+/**
+
+** 1.    Complete the Front - Page theme
+** 2.    Put Static Content Placeholder
+** 3.    Put Navigation
+** 4.    Do all the above for mobile
+
+*/
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <Navbar />
+      <section className="App-section">
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
         <div className='myInfo'>
-          <div>
             <h1>Nitish Mittal</h1>
             <p>Full Stack Developer</p>
-          </div>
+            <button className='portfolioBtn'>Fire Rocket</button>
         </div>
-      </header>
+      </section>
     </div>
   );
 }
