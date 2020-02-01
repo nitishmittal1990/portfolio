@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactModal from "react-modal";
 
+import AboutModal from './AboutModal.js';
+import ContactModal from "./ContactModal.js";
+import ProjectModal from "./ProjectModal.js";
 
 
 class Navbar extends React.Component {
@@ -14,6 +17,7 @@ class Navbar extends React.Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.renderContent = this.renderContent.bind(this);
   }
+
   handleOpenModal(e) {
     this.setState({ 
         showModal: true,
@@ -27,22 +31,20 @@ class Navbar extends React.Component {
 
   renderContent() {
     if(this.state.modalType === 'about') {
-        return <div>About</div>;
+        return <AboutModal />;
     }
     if (this.state.modalType === "project") {
-    return <div>Project</div>;
+        return <ProjectModal />;
     }
     if (this.state.modalType === "contact") {
-    return <div>Contact</div>;
+        return <ContactModal />;
     }
-    return (
-        <div></div>
-    );
+    return null;
   }
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <nav>
           <ul className="nav">
             <li onClick={this.handleOpenModal} id="about">
@@ -64,10 +66,10 @@ class Navbar extends React.Component {
           contentLabel="About Us Modal"
           shouldCloseOnOverlayClick={false}
         >
-          <button onClick={this.handleCloseModal}>Close Modal</button>
+          <button onClick={this.handleCloseModal} className='Modal-close'>X</button>
           {this.renderContent()}
         </ReactModal>
-      </div>
+      </React.Fragment>
     );
   }
 }

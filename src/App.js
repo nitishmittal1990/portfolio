@@ -3,15 +3,6 @@ import React from 'react';
 import Navbar from './components/Navbar.js'
 import './App.css';
 
-/**
-
-** 1.    Complete the Front - Page theme
-** 2.    Put Static Content Placeholder
-** 3.    Put Navigation
-** 4.    Do all the above for mobile
-
-*/
-
 
 function App() {
   return (
