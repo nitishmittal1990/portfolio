@@ -1094,7 +1094,7 @@ body {
   box-shadow: 1147px 1177px #FFF, 1405px 754px #FFF, 1023px 1416px #FFF, 288px 701px #FFF, 693px 529px #FFF, 717px 192px #FFF, 317px 1545px #FFF, 1062px 1306px #FFF, 1451px 647px #FFF, 1783px 242px #FFF, 1012px 997px #FFF, 1262px 756px #FFF, 1140px 495px #FFF, 78px 1651px #FFF, 1736px 776px #FFF, 1800px 937px #FFF, 955px 1668px #FFF, 1716px 1876px #FFF, 1054px 497px #FFF, 1365px 1306px #FFF, 1406px 1295px #FFF, 1928px 1706px #FFF, 256px 683px #FFF, 264px 410px #FFF, 567px 772px #FFF, 1209px 1742px #FFF, 1623px 1081px #FFF, 13px 1651px #FFF, 1708px 621px #FFF, 1395px 1803px #FFF, 356px 94px #FFF, 1007px 38px #FFF, 635px 929px #FFF, 332px 743px #FFF, 1011px 1281px #FFF, 377px 737px #FFF, 1502px 465px #FFF, 46px 958px #FFF, 116px 891px #FFF, 1095px 1444px #FFF, 301px 1915px #FFF, 90px 1647px #FFF, 1905px 1407px #FFF, 776px 1373px #FFF, 395px 1737px #FFF, 1901px 189px #FFF, 1149px 965px #FFF, 936px 122px #FFF, 880px 429px #FFF, 76px 1246px #FFF, 17px 1578px #FFF, 207px 224px #FFF, 246px 1371px #FFF, 961px 585px #FFF, 1580px 1142px #FFF, 325px 1727px #FFF, 388px 1931px #FFF, 1091px 537px #FFF, 1943px 1906px #FFF, 122px 288px #FFF, 913px 433px #FFF, 732px 363px #FFF, 1559px 1481px #FFF, 364px 889px #FFF, 61px 771px #FFF, 1695px 1438px #FFF, 1974px 1681px #FFF, 414px 467px #FFF, 1248px 1789px #FFF, 1020px 872px #FFF, 705px 1910px #FFF, 7px 907px #FFF, 1075px 213px #FFF, 186px 291px #FFF, 953px 561px #FFF, 1455px 1925px #FFF, 1896px 546px #FFF, 224px 1320px #FFF, 441px 788px #FFF, 1500px 1870px #FFF, 712px 1332px #FFF, 1547px 1798px #FFF, 1346px 820px #FFF, 1742px 1318px #FFF, 276px 849px #FFF, 538px 143px #FFF, 453px 1189px #FFF, 1511px 1436px #FFF, 1734px 61px #FFF, 1078px 494px #FFF, 442px 1073px #FFF, 394px 365px #FFF, 395px 648px #FFF, 152px 1027px #FFF, 1547px 1208px #FFF, 1723px 701px #FFF, 1427px 1505px #FFF, 1179px 1900px #FFF, 381px 124px #FFF, 1680px 335px #FFF
 }
 
-/* @keyframes animStar {
+@keyframes animStar {
   from {
     transform: translateY(0px)
   }
@@ -1102,7 +1102,7 @@ body {
   to {
     transform: translateY(-2000px)
   }
-} */
+}
 
 .App-link {
   color: #61dafb;
