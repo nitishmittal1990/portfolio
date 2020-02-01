@@ -125,3 +125,31 @@ nav > ul > li {
   margin: 0 12px;
   display: inline-block;
 }
+
+nav > ul > li:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}
+.ReactModal__Body--open,
+.ReactModal__Html--open {
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+  nav {
+    font-size: 1em;
+  }
+}
