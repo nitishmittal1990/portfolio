@@ -1196,7 +1196,7 @@ nav > ul > li:hover {
   height: 50px;
   display: inline-block;
   margin: 0;
-  background: rgba(255, 255, 255, 0.2);
+  /* background: rgba(255, 255, 255, 0.2); */
 }
 .GameWrap .grid.rocket {
   background-color: #F57C22;
@@ -1205,6 +1205,7 @@ nav > ul > li:hover {
 .GameWrap .grid.bubble {
   background: yellow;
   border-radius: 50%;
+
 }
 
 @media only screen and (max-width: 600px) {
