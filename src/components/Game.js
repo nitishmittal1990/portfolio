@@ -14,113 +14,113 @@ class Game extends React.Component {
   constructor() {
     super();
     this.state = {
-      gameGrid: [],
-      rocketGrid: []
+      rocketGrid: [],
+      bubbleGrid: []
     };
-    this.formSpaceGrid = this.formSpaceGrid.bind(this);
+
     this.formRocketGrid = this.formRocketGrid.bind(this);
     this.generateRandomBubble = this.generateRandomBubble.bind(this);
     this.moveBubble = this.moveBubble.bind(this);
-    this.formSpaceGrid();
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.formRocketGrid();
   }
 
-  formSpaceGrid() {
-    for (let i = 0; i < Math.floor(window.innerHeight / 50)-1; i++) {
-      for (let j = 0; j < Math.floor(window.innerWidth / 50); j++) {
-        this.state.gameGrid.push({ x: i, y: j, isBubble: false });
-      }
-    }
-  }
-
   formRocketGrid() {
-    for (let j = 0; j < Math.floor(window.innerWidth / 50); j++) {
-      if(j === 14) {
-        this.state.rocketGrid.push({ y: j, isRocket: true });
-      } else {
-        this.state.rocketGrid.push({y:j, isRocket: false});
-      }
-    }
+    const middleRocket = Math.floor(window.innerWidth / 20);
+    const xordinateRocket = Math.floor(window.innerHeight / 10);
+    this.state.rocketGrid.push({ x: xordinateRocket, y: middleRocket });
+    console.log(this.state.rocketGrid);
   }
 
   generateRandomBubble() {
-    let y1 = Math.floor(Math.random() * (window.innerWidth / 50));
-    let y2 = Math.floor(Math.random() * (window.innerWidth / 50));
-    let y3 = Math.floor(Math.random() * (window.innerWidth / 50));
+    let y1 = Math.floor(Math.random() * (window.innerWidth / 10));
+    let y2 = Math.floor(Math.random() * (window.innerWidth / 10));
+    let y3 = Math.floor(Math.random() * (window.innerWidth / 10));
     console.log(y1, y2, y3);
-    let bubbleObject = [{x: 0, y: y1},{x: 1, y: y2},{x: 2, y: y3}];
-    const formspaceGrid = this.state.gameGrid;
-    const updatedGrid = formspaceGrid.map((eachgrid) => {
-      let {x, y} = eachgrid;
-      if(x === 0 && y === bubbleObject[0].y) {
-        return {x: 0, y: eachgrid.y, isBubble: true};
-      }
-      if(x === 1 && y === bubbleObject[1].y){
-        return { x: 1, y: eachgrid.y, isBubble: true };
-      }
-      if(x === 2 && y === bubbleObject[2].y) {
-        return { x: 2, y: eachgrid.y, isBubble: true };
-      }
-      return eachgrid;
-    })
+    let bubbleObject = [
+      { x: 0, y: y1 },
+      { x: 1, y: y2 },
+      { x: 2, y: y3 }
+    ];
     this.setState({
-      gameGrid: updatedGrid,
-    })
+      bubbleGrid: bubbleObject
+    });
   }
 
-  moveBubble() {
-    let filteredBubbleGrid = this.state.gameGrid.filter((eachgrid) => {
-      return eachgrid.isBubble;
-    })
-    let mappedBubbleGrid = filteredBubbleGrid.map((eachgrid) => {
-      return {x: eachgrid.x + 1, y: eachgrid.y, isBubble: true};
-    })
-
-    // console.log(filteredBubbleGrid,'filter');
-    // console.log(mappedBubbleGrid, 'map');
-    // console.log(xOrdinateArray, 'xaary');
-    // console.log(yOrdinateArray, 'yaary');
-
-    let updatedBubbleGrid = this.state.gameGrid.map((eachgrid) => {
-      for(let el of mappedBubbleGrid) {
-        if(el.x === eachgrid.x && el.y === eachgrid.y) {
-          return { x: eachgrid.x, y: eachgrid.y, isBubble: true }
-        }
+  handleKeyDown(event) {
+    const rightArrow = 39;
+    const leftArrow = 37;
+    const maxY = Math.floor(window.innerWidth / 10);
+    const minY = 0;
+    const {x, y} = this.state.rocketGrid[0];
+    if (event.keyCode === rightArrow) {
+      if(y < maxY) {
+        this.setState({
+          rocketGrid: [{ x: x, y: y + 1 }]
+        });
       }
-      return { x: eachgrid.x, y: eachgrid.y, isBubble: false}
-    })
-    // console.log(updatedBubbleGrid);
+    }
+    if (event.keyCode === leftArrow) {
+      if(y > minY) {
+        this.setState({
+          rocketGrid: [{ x: x, y: y - 1 }]
+        });
+      }
+    }
+    
+    
+  };
+
+  moveBubble() {
+    let updatedBubbleGrid = this.state.bubbleGrid.map(eachgrid => {
+      return { x: eachgrid.x + 1, y: eachgrid.y };
+    });
+
     this.setState({
-      gameGrid: updatedBubbleGrid,
-    })
+      bubbleGrid: updatedBubbleGrid
+    });
   }
 
   componentDidMount() {
     this.generateRandomBubble();
+    document.addEventListener('keydown', this.handleKeyDown);
     setInterval(() => {
-      console.log('hello');
       this.moveBubble();
-    }, 400);
+    }, 200);
   }
-  
 
-  
   render() {
-    var spaceGridList = this.state.gameGrid.map((eachgrid) => {
-      let gridClass = eachgrid.isBubble ? 'grid bubble': 'grid';
-      return <div className={gridClass} x={eachgrid.x} y={eachgrid.y}  key={eachgrid.x + '-' + eachgrid.y}></div>
-    })
-    var rocketGridList = this.state.rocketGrid.map((eachgrid) => {
-      let rocketClass = eachgrid.isRocket ? 'grid rocket': 'grid'; 
-      return <div className={rocketClass} y={eachgrid.y} key={eachgrid.y}></div>
-    })
-    // console.log(this.state.gameGrid);
+    var bubbleObject = this.state.bubbleGrid.map(eachbubble => {
+      let style = {
+        position: "absolute",
+        left: eachbubble.y === 0 ? 10 : eachbubble.y * 10,
+        top: eachbubble.x === 0 ? 10 : eachbubble.x * 10
+      };
+      return (
+        <div
+          className="grid bubble"
+          x={eachbubble.x}
+          y={eachbubble.y}
+          key={`${eachbubble.x} ${eachbubble.y}`}
+          style={style}
+        ></div>
+      );
+    });
+    var rocketGridList = this.state.rocketGrid.map(eachgrid => {
+      let style = {
+        position: "absolute",
+        left: eachgrid.y === 0 ? 10 : eachgrid.y * 10,
+        top: eachgrid.x * 10
+      };
+      return (
+        <div className='grid rocket' y={eachgrid.y} key={eachgrid.y} style={style}></div>
+      );
+    });
+
     return (
       <React.Fragment>
-        {spaceGridList}
-        <div className='rocketGrid'>
-          {rocketGridList}
-        </div>
+        {bubbleObject}
+        <div className="rocketGrid">{rocketGridList}</div>
       </React.Fragment>
     );
   }
