@@ -11,8 +11,8 @@ import React from 'react';
  */
 
 class Game extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       rocketGrid: [],
       bubbleGrid: [],
@@ -31,7 +31,9 @@ class Game extends React.Component {
     this.moverRocketLeft = this.moverRocketLeft.bind(this);
     this.moverRocketRight = this.moverRocketRight.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.startGame = this.startGame.bind(this);
     this.formRocketGrid();
+    
   }
 
   formRocketGrid() {
@@ -83,7 +85,7 @@ class Game extends React.Component {
   }
 
   handleClick(e) {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     if (e.target.value === 'right') {
       this.moverRocketRight();
     }
@@ -131,7 +133,7 @@ class Game extends React.Component {
     if (this.state.fire.length !== 0) {
       let updatedFire = this.state.fire.map(eachfire => {
         return { x: eachfire.x - 1, y: eachfire.y };
-      });
+      })
       this.setState({
         fire: updatedFire
       });
@@ -141,16 +143,22 @@ class Game extends React.Component {
   isDestroyBubble() {
     const bubbleArray = this.state.bubbleGrid;
     const fireArray = this.state.fire;
-    bubbleArray.forEach(element => {
-      // console.log(element, 'bubbleArray');
-      for (let i = 0; i < fireArray.length; i++) {
-        // console.log(fireArray, "bubbleArray");
-        if (element.x === fireArray[i].x && element.y === fireArray[i].y) {
-          fireArray.splice(i, 1);
-          bubbleArray.splice(bubbleArray.indexOf(element), 1);
+    if(fireArray.length > 1) {
+      bubbleArray.forEach(element => {
+        // console.log(element, 'bubbleArray');
+        for (let i = 0; i < fireArray.length; i++) {
+          // console.log(fireArray, "bubbleArray");
+          if (fireArray[i].x < -10) {
+            fireArray.splice(i, 1);
+          }
+          if (element.x === fireArray[i].x && element.y === fireArray[i].y) {
+            fireArray.splice(i, 1);
+            bubbleArray.splice(bubbleArray.indexOf(element), 1);
+          }
         }
-      }
-    });
+      });
+    }
+    
 
     this.setState({
       bubbleGrid: bubbleArray,
@@ -166,7 +174,7 @@ class Game extends React.Component {
     }
   }
 
-  componentDidMount() {
+  startGame() {
     this.generateRandomBubble();
     document.addEventListener("keydown", this.handleKeyDown);
     setInterval(() => {
@@ -175,6 +183,10 @@ class Game extends React.Component {
       this.generateBubble();
       this.moveFire();
     }, 200);
+  }
+
+  componentDidMount() {
+    this.startGame();
   }
 
   render() {
@@ -231,11 +243,11 @@ class Game extends React.Component {
       <React.Fragment>
         {bubbleObject}
         <div className="arrows">
-          <button onClick={this.handleClick} value='right'> right </button>
-          <button onClick={this.handleClick} value='left'> left </button>
+          <button className='smallBtn' onClick={this.handleClick} value='left'> Left </button> &nbsp;
+          <button className='smallBtn' onClick={this.handleClick} value='right'> Right </button>
         </div>
         <div className="fireButton">
-          <button onClick={this.handleClick} value='fire'>Fire</button>
+          <button className='smallBtn' onClick={this.handleClick} value='fire'>Fire</button>
         </div>
         {firelist}
         <div className="rocketGrid">{rocketGridList}</div>
