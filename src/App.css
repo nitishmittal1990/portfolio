@@ -1205,10 +1205,17 @@ nav > ul > li:hover {
   background-color: #F57C22;
 }
 
+.GameWrap .grid.fire {
+  background-color: orange;
+}
+
 .GameWrap .grid.bubble {
   background: yellow;
   border-radius: 50%;
 
+}
+.arrows {
+  display: none;
 }
 
 @media only screen and (max-width: 600px) {
@@ -1217,5 +1224,12 @@ nav > ul > li:hover {
   }
   .myInfo {
     margin-top: 25%;
+  }
+  .arrows {
+    display: block;
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    font-size: 12px;
   }
 }

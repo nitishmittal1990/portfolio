@@ -15,7 +15,9 @@ class Game extends React.Component {
     super();
     this.state = {
       rocketGrid: [],
-      bubbleGrid: []
+      bubbleGrid: [],
+      score: 0,
+      fire: [],
     };
 
     this.formRocketGrid = this.formRocketGrid.bind(this);
@@ -68,6 +70,12 @@ class Game extends React.Component {
       }
     }
     
+    if(event.keyCode === 0 || event.keyCode === 32) {
+      const { x: rocketx, y: rockety } = this.state.rocketGrid[0];
+      console.log(rocketx, rockety);
+      this.state.fire.push({x: rocketx, y: rockety});
+    }
+
     
   };
 
@@ -80,12 +88,23 @@ class Game extends React.Component {
       bubbleGrid: updatedBubbleGrid
     });
   }
+  moveFire() {
+    if(this.state.fire.length !== 0) {
+      let updatedFire = this.state.fire.map(eachfire => {
+        return {x: eachfire.x - 1, y: eachfire.y};
+      })
+      this.setState({
+        fire: updatedFire
+      });
+    }
+  }
 
   componentDidMount() {
     this.generateRandomBubble();
     document.addEventListener('keydown', this.handleKeyDown);
     setInterval(() => {
       this.moveBubble();
+      this.moveFire();
     }, 200);
   }
 
@@ -116,10 +135,30 @@ class Game extends React.Component {
         <div className='grid rocket' y={eachgrid.y} key={eachgrid.y} style={style}></div>
       );
     });
-
+    var firelist = this.state.fire.map((eachfire) => {
+      let style = {
+        position: "absolute",
+        left: eachfire.y === 0 ? 10 : eachfire.y * 10,
+        top: eachfire.x * 10
+      };
+      return (
+        <div
+          className="grid fire"
+          x={eachfire.x}
+          y={eachfire.y}
+          key={`${eachfire.x} ${eachfire.y}`}
+          style={style}
+        ></div>
+      );
+    })
     return (
       <React.Fragment>
         {bubbleObject}
+        <div className="arrows">
+          <button onClick={this.handleKeyDown("right")}> right </button>
+          <button onClick={this.handleKeyDown("left")}> left </button>
+        </div>
+        {firelist}
         <div className="rocketGrid">{rocketGridList}</div>
       </React.Fragment>
     );
