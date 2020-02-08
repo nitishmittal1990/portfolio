@@ -17,13 +17,20 @@ class Game extends React.Component {
       rocketGrid: [],
       bubbleGrid: [],
       score: 0,
-      fire: [],
+      fire: []
     };
 
     this.formRocketGrid = this.formRocketGrid.bind(this);
     this.generateRandomBubble = this.generateRandomBubble.bind(this);
     this.moveBubble = this.moveBubble.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.moveFire = this.moveFire.bind(this);
+    this.isDestroyBubble = this.isDestroyBubble.bind(this);
+    this.generateBubble = this.generateBubble.bind(this);
+    this.fireRocket = this.fireRocket.bind(this);
+    this.moverRocketLeft = this.moverRocketLeft.bind(this);
+    this.moverRocketRight = this.moverRocketRight.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.formRocketGrid();
   }
 
@@ -49,61 +56,123 @@ class Game extends React.Component {
     });
   }
 
+  moverRocketRight() {
+    const maxY = Math.floor(window.innerWidth / 10);
+    const { x, y } = this.state.rocketGrid[0];
+    if (y < maxY) {
+      this.setState({
+        rocketGrid: [{ x: x, y: y + 1 }]
+      });
+    }
+  }
+
+  moverRocketLeft() {
+    const minY = 0;
+    const { x, y } = this.state.rocketGrid[0];
+    if (y > minY) {
+      this.setState({
+        rocketGrid: [{ x: x, y: y - 1 }]
+      });
+    }
+  }
+
+  fireRocket() {
+    const { x: rocketx, y: rockety } = this.state.rocketGrid[0];
+    console.log(rocketx, rockety);
+    this.state.fire.push({ x: rocketx, y: rockety });
+  }
+
+  handleClick(e) {
+    console.log(e.target.value);
+    if (e.target.value === 'right') {
+      this.moverRocketRight();
+    }
+    if (e.target.value === "left") {
+      this.moverRocketLeft();
+    }
+
+    if (e.target.value === "fire") {
+      this.fireRocket();
+    }
+  }
+
   handleKeyDown(event) {
+    
     const rightArrow = 39;
     const leftArrow = 37;
-    const maxY = Math.floor(window.innerWidth / 10);
-    const minY = 0;
-    const {x, y} = this.state.rocketGrid[0];
+
     if (event.keyCode === rightArrow) {
-      if(y < maxY) {
-        this.setState({
-          rocketGrid: [{ x: x, y: y + 1 }]
-        });
-      }
+      this.moverRocketRight();
     }
     if (event.keyCode === leftArrow) {
-      if(y > minY) {
-        this.setState({
-          rocketGrid: [{ x: x, y: y - 1 }]
-        });
-      }
-    }
-    
-    if(event.keyCode === 0 || event.keyCode === 32) {
-      const { x: rocketx, y: rockety } = this.state.rocketGrid[0];
-      console.log(rocketx, rockety);
-      this.state.fire.push({x: rocketx, y: rockety});
+      this.moverRocketLeft();
     }
 
-    
-  };
+    if (event.keyCode === 0 || event.keyCode === 32) {
+      this.fireRocket();
+    }
+  }
 
   moveBubble() {
-    let updatedBubbleGrid = this.state.bubbleGrid.map(eachgrid => {
-      return { x: eachgrid.x + 1, y: eachgrid.y };
-    });
+    let updatedBubbleGrid = this.state.bubbleGrid
+      .map(eachgrid => {
+        return { x: eachgrid.x + 1, y: eachgrid.y };
+      })
+      .filter(eachbubble => {
+        return eachbubble.x < Math.floor(window.innerHeight / 10);
+      });
 
     this.setState({
       bubbleGrid: updatedBubbleGrid
     });
   }
+
   moveFire() {
-    if(this.state.fire.length !== 0) {
+    if (this.state.fire.length !== 0) {
       let updatedFire = this.state.fire.map(eachfire => {
-        return {x: eachfire.x - 1, y: eachfire.y};
-      })
+        return { x: eachfire.x - 1, y: eachfire.y };
+      });
       this.setState({
         fire: updatedFire
       });
     }
   }
 
+  isDestroyBubble() {
+    const bubbleArray = this.state.bubbleGrid;
+    const fireArray = this.state.fire;
+    bubbleArray.forEach(element => {
+      // console.log(element, 'bubbleArray');
+      for (let i = 0; i < fireArray.length; i++) {
+        // console.log(fireArray, "bubbleArray");
+        if (element.x === fireArray[i].x && element.y === fireArray[i].y) {
+          fireArray.splice(i, 1);
+          bubbleArray.splice(bubbleArray.indexOf(element), 1);
+        }
+      }
+    });
+
+    this.setState({
+      bubbleGrid: bubbleArray,
+      fire: fireArray
+    });
+  }
+
+  generateBubble() {
+    // this.state.bubbleGrid;
+    if (this.state.bubbleGrid.length < 3) {
+      let y1 = Math.floor(Math.random() * (window.innerWidth / 10));
+      this.state.bubbleGrid.push({ x: 0, y: y1 });
+    }
+  }
+
   componentDidMount() {
     this.generateRandomBubble();
-    document.addEventListener('keydown', this.handleKeyDown);
+    document.addEventListener("keydown", this.handleKeyDown);
     setInterval(() => {
       this.moveBubble();
+      this.isDestroyBubble();
+      this.generateBubble();
       this.moveFire();
     }, 200);
   }
@@ -125,6 +194,7 @@ class Game extends React.Component {
         ></div>
       );
     });
+
     var rocketGridList = this.state.rocketGrid.map(eachgrid => {
       let style = {
         position: "absolute",
@@ -132,10 +202,16 @@ class Game extends React.Component {
         top: eachgrid.x * 10
       };
       return (
-        <div className='grid rocket' y={eachgrid.y} key={eachgrid.y} style={style}></div>
+        <div
+          className="grid rocket"
+          y={eachgrid.y}
+          key={eachgrid.y}
+          style={style}
+        ></div>
       );
     });
-    var firelist = this.state.fire.map((eachfire) => {
+
+    var firelist = this.state.fire.map(eachfire => {
       let style = {
         position: "absolute",
         left: eachfire.y === 0 ? 10 : eachfire.y * 10,
@@ -150,13 +226,16 @@ class Game extends React.Component {
           style={style}
         ></div>
       );
-    })
+    });
     return (
       <React.Fragment>
         {bubbleObject}
         <div className="arrows">
-          <button onClick={this.handleKeyDown("right")}> right </button>
-          <button onClick={this.handleKeyDown("left")}> left </button>
+          <button onClick={this.handleClick} value='right'> right </button>
+          <button onClick={this.handleClick} value='left'> left </button>
+        </div>
+        <div className="fireButton">
+          <button onClick={this.handleClick} value='fire'>Fire</button>
         </div>
         {firelist}
         <div className="rocketGrid">{rocketGridList}</div>
