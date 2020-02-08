@@ -11,7 +11,9 @@ class App extends React.Component {
     super();
     this.state = {
       isGameStarted: false,
-      showRuleModal: false
+      showRuleModal: false,
+      GameOver: false,
+      score: 0,
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -34,6 +36,17 @@ class App extends React.Component {
     this.setState({ showRuleModal: false });
   }
 
+  isGameOver = (datafromchild) => {
+    if(datafromchild.isGameOver === false) {
+      this.setState({
+        isGameStarted: false,
+        GameOver: true,
+        score: datafromchild.score
+      });
+    }
+  }
+
+
   render() {
     return (
       <div className="App">
@@ -43,20 +56,22 @@ class App extends React.Component {
           <div id="stars2"></div>
           <div id="stars3"></div>
           <div className="GameWrap">
-            {this.state.isGameStarted?<Game />:null}
+            {this.state.isGameStarted ? (
+              <Game isGameOverCallback={this.isGameOver} />
+            ) : null}
           </div>
-          {this.state.isGameStarted? null: 
-          <div className="myInfo">
-            <h1>Nitish Mittal</h1>
-            <p>Full Stack Developer</p>
-            <button
-              className="portfolioBtn"
-              onClick={this.handleOpenModal}
-              id="GameRule"
-            >
-              Fire Rocket
-            </button>
-          </div>}
+          {this.state.isGameStarted ? null : (
+            <div className="myInfo">
+              {this.state.GameOver ? <><h1>Game Over</h1> <p>Your Score: {this.state.score}</p></> : <><h1>Nitish Mittal</h1><p>Full Stack Developer</p></> }
+              <button
+                className="portfolioBtn"
+                onClick={this.handleOpenModal}
+                id="GameRule"
+              >
+                Fire Rocket
+              </button>
+            </div>
+          )}
         </section>
         <ReactModal
           shouldCloseOnEsc
@@ -75,9 +90,7 @@ class App extends React.Component {
             </header>
             <section>
               <div className="row"></div>
-              <button onClick={this.handleGameStatus}>
-                Start Game
-              </button>
+              <button onClick={this.handleGameStatus}>Start Game</button>
             </section>
           </div>
         </ReactModal>
