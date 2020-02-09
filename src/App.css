@@ -208,7 +208,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Mono', monospace;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -1120,10 +1120,75 @@ body {
   margin: 0;
 }
 
-.myInfo > p {
+.myInfo > .subtext,.myInfo > p {
   font-size:2em;
   margin-top: 12px;
-  
+}
+.myInfo > .subtext {
+  position: relative;
+  left: -40px;
+}
+.subtext em{
+  font-style: italic;
+}
+
+.subtext > span {
+  color: #00A289;
+  font-weight: 500;
+}
+.rotateText {
+  display: inline-block;
+  height: 44px;
+  vertical-align: middle;
+  position: relative;
+  max-width: 80px;
+  margin-left:12px;
+}
+@keyframes rotateWord {
+    0% { opacity: 0; }
+    2% { opacity: 0; -webkit-transform: translateY(-30px); transform: translateY(-30px); }
+	5% { opacity: 1; -webkit-transform: translateY(0px); transform: translateY(0px);}
+    17% { opacity: 1; -webkit-transform: translateY(0px); transform: translateY(0px); }
+	20% { opacity: 0; -webkit-transform: translateY(30px); transform: translateY(30px); }
+	80% { opacity: 0; }
+    100% { opacity: 0; }
+}
+.rotateText > span {
+  position: absolute;
+  opacity: 0;
+  overflow: hidden;
+  -webkit-animation: rotateWord 12s linear infinite 0s;
+  -ms-animation: rotateWord 12s linear infinite 0s;
+  animation: rotateWord 12s linear infinite 0s;
+  white-space: nowrap;
+}
+.rotateText span:nth-child(2) {
+    -webkit-animation-delay: 3s;
+    -ms-animation-delay: 3s;
+    animation-delay: 3s;
+}
+.rotateText span:nth-child(3) {
+    -webkit-animation-delay: 6s;
+    -ms-animation-delay: 6s;
+    animation-delay: 6s;
+}
+.rotateText span:nth-child(4) {
+    -webkit-animation-delay: 9s;
+    -ms-animation-delay: 9s;
+    animation-delay: 9s;
+}
+
+
+@keyframes rotatewords{
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .portfolioBtn {

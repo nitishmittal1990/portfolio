@@ -62,7 +62,14 @@ class App extends React.Component {
           </div>
           {this.state.isGameStarted ? null : (
             <div className="myInfo">
-              {this.state.GameOver ? <><h1>Game Over</h1> <p>Your Score: {this.state.score}</p></> : <><h1>Nitish Mittal</h1><p>Full Stack Developer</p></> }
+              {this.state.GameOver ? <><h1>Game Over</h1> <p>Your Score: {this.state.score}</p></> : <><h1>Nitish Mittal</h1>
+              <div className='subtext'>i <em>design</em> &amp; <span>develop</span> 
+              <div className='rotateText'>
+                <span>WebApps</span>
+                <span>Websites</span>
+                <span>UI / UX</span>
+                <span>Products</span>
+              </div> </div></> }
               <button
                 className="portfolioBtn"
                 onClick={this.handleOpenModal}
