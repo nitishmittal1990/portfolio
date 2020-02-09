@@ -50,6 +50,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <ul className='socialIcons'>
+          <li><a href='https://dribbble.com/nitishmittal' target='_blank' rel='noopener noreferrer'><img src={process.env.PUBLIC_URL + "/dribbble.png"} alt='Dribbble logo' title='Dribbble' /></a></li>
+          <li><a href='https://medium.com/@nitishmittal' target='_blank' rel='noopener noreferrer'><img src={process.env.PUBLIC_URL + "/medium.png"} alt='Medium logo' title='Medium' /></a></li>
+          <li><a href='https://twitter.com/nitish_mittal19' target='_blank' rel='noopener noreferrer'><img src={process.env.PUBLIC_URL + "/twitter.png"} alt='Twitter logo' title='Twitter' /></a></li>
+          <li><a href='https://github.com/nitishmittal1990/' target='_blank' rel='noopener noreferrer'><img src={process.env.PUBLIC_URL + "/github.png"} alt='Github logo' title='Github' /></a></li>
+          
+        </ul>
         <Navbar />
         <section className="App-section">
           <div id="stars"></div>

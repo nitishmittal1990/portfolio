@@ -2,7 +2,7 @@ import React from "react";
 
 function ProjectModal() {
   return (
-    <div>
+    <div className="projectModal">
       <header>
         <h3>Projects</h3>
       </header>
