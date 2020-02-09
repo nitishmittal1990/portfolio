@@ -1402,6 +1402,86 @@ nav > ul > li:hover {
   max-height: 100%;
 }
 
+/* ------------ Project Modal ------------ */
+.videoWrap {
+  box-shadow: 1px 0px 12px 3px rgba(0, 0, 0, 0.08);
+    margin-top: 24px;
+    padding: 12px;
+    border-radius: 2px;
+}
+.videoWrap > img {
+  width: 100%;
+}
+.projectHead {
+    margin-top: 36px;
+}
+
+.projectHead h4 {
+  font-size:1.4em;
+  font-weight: 500;
+  color: #00A289;
+  margin-bottom: 12px;
+}
+
+.projectHead > p {
+  margin-bottom: 12px;
+}
+.projectHead a {
+  background-color: #00A289;
+  display: inline-block;
+  width: 150px;
+  height: 36px;
+  color: #fff;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 36px;
+  margin-top: 24px;
+}
+
+/* ------------ Experience Modal ------------ */
+
+.experienceContent {
+  margin-top: 56px;
+}
+.experienceContent > ul > li {
+  display: inline-block;
+  width: 48%;
+  background: #f9f9f9;
+  padding:12px;
+  box-shadow: 1px 1px 8px 2px rgba(0, 0, 0, 0.08)
+}
+.eximgwrap {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  position: relative;
+  margin-top: -60px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 8px;
+}
+.experienceContent h4 {
+  color: #00A289;
+  font-size: 1.2em;
+  margin-bottom: 8px;
+}
+.experienceContent h5 {
+  margin-bottom: 8px;
+}
+.eximgwrap > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.experienceCard ul {
+  list-style-type: disc;
+  margin-left: 18px;
+}
+.experienceCard ul > li {
+  margin-bottom: 8px;
+}
+
+
+
 @media only screen and (max-width: 600px) {
   .myModalNitish {
     left: 20px;

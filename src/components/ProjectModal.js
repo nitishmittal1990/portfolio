@@ -8,47 +8,32 @@ function ProjectModal() {
       </header>
       <section>
         <div className="row">
-          <div className="col-md-6">
-            <img
-              src="https://dummyimage.com/600x400/000/fff"
-              alt="Project 1"
-              height="150"
-            />
+          <div className="col-md-7">
+            <div className="videoWrap">
+              <img src={process.env.PUBLIC_URL + "/snakerecording.gif"} alt='snake recording' />
+            </div>
           </div>
-          <div className="col-md-6">
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with
-            </p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6">
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with
-            </p>
-          </div>
-          <div className="col-md-6">
-            <img
-              src="https://dummyimage.com/600x400/000/fff"
-              alt="Project 1"
-              height="150"
-            />
+          <div className="col-md-5">
+            <div className="projectHead">
+              <h4>Snake Game</h4>
+              <p>
+                Snake Game is built using React
+              </p>
+              <p>
+                It has feature show score as well.
+              </p>
+              <p>
+                If you hit the wall game will be ended.
+              </p>
+              <div>
+                <p>Technology Used:</p>
+                <img src={process.env.PUBLIC_URL + "/react.png"} alt='react' height='60'/>
+              </div>
+              <a href="https://nitishmittal1990.github.io/snakegame/" target="_blank" rel="noopener noreferrer">Play Game</a>
+            </div>
           </div>
         </div>
+        
       </section>
     </div>
   );

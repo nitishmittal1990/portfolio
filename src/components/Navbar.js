@@ -2,7 +2,7 @@ import React from 'react';
 import ReactModal from "react-modal";
 
 import AboutModal from './AboutModal.js';
-import ContactModal from "./ContactModal.js";
+import ExperienceModal from './ExperienceModal.js';
 import ProjectModal from "./ProjectModal.js";
 
 
@@ -36,8 +36,8 @@ class Navbar extends React.Component {
     if (this.state.modalType === "project") {
         return <ProjectModal />;
     }
-    if (this.state.modalType === "contact") {
-        return <ContactModal />;
+    if (this.state.modalType === "experience") {
+        return <ExperienceModal />;
     }
     return null;
   }
@@ -53,8 +53,8 @@ class Navbar extends React.Component {
             <li onClick={this.handleOpenModal} id="project">
               Projects
             </li>
-            <li onClick={this.handleOpenModal} id="contact">
-              Contact Me
+            <li onClick={this.handleOpenModal} id="experience">
+              Experience
             </li>
           </ul>
         </nav>

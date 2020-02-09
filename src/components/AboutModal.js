@@ -14,7 +14,7 @@ function AboutModal() {
                 <p>Worked in Start-up post graduation primarily in E-commerce,
                    Education & SAAS Domain.
                 </p>
-                <p>Seek for perfection in products & pixel perfection interface </p>
+                <p>Seek perfection in products & pixel perfection interface. </p>
                 <p>Always look forward to learn and go beyond my comfort zone to own up and get things done.</p>
                 <div style={{'marginBottom':'20px'}}><h4>Skills:</h4></div>
                 <ul className='list-inline'>
