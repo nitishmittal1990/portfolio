@@ -67,7 +67,7 @@ class App extends React.Component {
               <div className='rotateText'>
                 <span>WebApps</span>
                 <span>Websites</span>
-                <span>UI / UX</span>
+                <span>UI/UX</span>
                 <span>Products</span>
               </div> </div></> }
               <button

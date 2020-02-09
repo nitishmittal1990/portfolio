@@ -2,30 +2,39 @@ import React from 'react';
 
 function AboutModal() {
     return (
-      <div>
+      <div className="aboutModal">
         <header>
           <h3>About Me</h3>
         </header>
         <section>
           <div className="row">
             <div className="col-md-6">
-              <img
-                src={process.env.PUBLIC_URL + "/nitish.jpg"}
-                alt="Nitish Pic"
-                height="150"
-              />
+              <div className='aboutModalContent'>
+                <p>Innovative optimized solution seeker.</p>
+                <p>Worked in Start-up post graduation primarily in E-commerce,
+                   Education & SAAS Domain.
+                </p>
+                <p>Seek for perfection in products & pixel perfection interface </p>
+                <p>Always look forward to learn and go beyond my comfort zone to own up and get things done.</p>
+                <p><h4>Skills:</h4></p>
+                <ul className='list-inline'>
+                  <li><img src={process.env.PUBLIC_URL + "/html5.png"} alt='html logo' title='HTML5'/></li>
+                  <li><img src={process.env.PUBLIC_URL + "/CSS3.svg"} alt='css logo' title='CSS3'/></li>
+                  <li><img src={process.env.PUBLIC_URL + "/js.png"} alt='JS logo' title='JavaScript' /></li>
+                  <li><img src={process.env.PUBLIC_URL + "/sketch.png"} alt='Sketch logo' title='Sketch UI Design' /></li>
+                  <li><img src={process.env.PUBLIC_URL + "/react.png"} alt='React logo' title='React' /></li>
+                  
+                </ul>
+              </div>
             </div>
             <div className="col-md-6">
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with
-              </p>
+              <div className="aboutModalImg">
+                <img
+                  src={process.env.PUBLIC_URL + "/myself.png"}
+                  alt="Art"
+                  height="350"
+                />
+              </div>
             </div>
           </div>
         </section>

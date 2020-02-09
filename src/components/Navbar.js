@@ -65,6 +65,7 @@ class Navbar extends React.Component {
           onRequestClose={this.handleCloseModal}
           contentLabel="About Us Modal"
           shouldCloseOnOverlayClick={false}
+          className="myModalNitish"
         >
           <button onClick={this.handleCloseModal} className='Modal-close'>X</button>
           {this.renderContent()}
