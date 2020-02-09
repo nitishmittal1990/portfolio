@@ -103,7 +103,11 @@ class App extends React.Component {
               <h3>Rules</h3>
             </header>
             <section>
-              <div className="row"></div>
+              <div className="row">
+                <p>Press Space to Fire</p>
+                <p>Press Right & Left key to move rocket</p>
+                <p>If any obstacle reaches to rocket, Game will be over</p>
+              </div>
               <button onClick={this.handleGameStatus}>Start Game</button>
             </section>
           </div>
