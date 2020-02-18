@@ -33,6 +33,12 @@ class Game extends React.Component {
     this.moverRocketRight = this.moverRocketRight.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.formRocketGrid();
+    this.interval = setInterval(() => {
+      this.moveBubble();
+      this.isDestroyBubble();
+      this.generateBubble();
+      this.moveFire();
+    }, 200);
     
   }
 
@@ -181,17 +187,13 @@ class Game extends React.Component {
   componentDidMount() {
     this._isMounted = true;
     document.addEventListener("keydown", this.handleKeyDown);
-    setInterval(() => {
-      this.moveBubble();
-      this.isDestroyBubble();
-      this.generateBubble();
-      this.moveFire();
-    }, 200);
+   
   }
   
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyDown);
     this._isMounted = false;
+    clearInterval(this.interval);
   }
 
   render() {
