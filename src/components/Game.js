@@ -154,12 +154,14 @@ class Game extends React.Component {
   isDestroyBubble() {
     const bubbleArray = this.state.bubbleGrid;
     const fireArray = this.state.fire;
-    if (fireArray.length > 1) {
+    if (fireArray.length > 0) {
       bubbleArray.forEach(element => {
         // console.log(element, 'bubbleArray');
         for (let i = 0; i < fireArray.length; i++) {
           // console.log(fireArray, "bubbleArray");
 
+          console.log('bubbleArray', element.x, element.y);
+          console.log('fireArray', fireArray[i].x, fireArray[i].y);
           if (element.x === fireArray[i].x && element.y === fireArray[i].y) {
             this.score += 10;
             fireArray.splice(i, 1);
