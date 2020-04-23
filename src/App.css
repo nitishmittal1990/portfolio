@@ -1238,7 +1238,13 @@ nav > ul > li {
   margin: 0 12px;
   display: inline-block;
 }
-
+nav > ul > li > a {
+  color: #00A289;
+}
+nav > ul > li > a:hover, nav > ul > li > a:focus {
+  color: #00A289;
+  text-decoration: underline;
+}
 nav > ul > li:hover {
   text-decoration: underline;
   cursor: pointer;
@@ -1480,7 +1486,41 @@ nav > ul > li:hover {
   margin-bottom: 8px;
 }
 
+/* ------------ Rules Modal ------------ */
+.rulesModal header {
+  font-size: 2em;
+  font-weight: 500;
+  color: #3F51B5;
+}
+.rulesModal .rulesList {
+  margin-top: 24px;
+  list-style-type: disc;
+  position: relative;
+  left: 36px;
+}
 
+.rulesModal .rulesList > li {
+  margin: 6px 0;
+}
+
+#StartGame {
+  background-color: #00A289;
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    color: #fff;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 36px;
+    margin-top: 24px;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    font-size: 1.2em;
+}
+#StartGame:hover, #StartGame:focus {
+  text-decoration: underline;
+}
 
 @media only screen and (max-width: 600px) {
   .myModalNitish {

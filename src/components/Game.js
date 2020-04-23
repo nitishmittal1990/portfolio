@@ -34,12 +34,13 @@ class Game extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.formRocketGrid();
     this.interval = setInterval(() => {
-      this.moveBubble();
       this.isDestroyBubble();
       this.generateBubble();
       this.moveFire();
     }, 200);
-    
+    this.moveBubbleInterval = setInterval(() => {
+      this.moveBubble();
+    }, 600);
   }
 
   formRocketGrid() {
@@ -196,6 +197,7 @@ class Game extends React.Component {
     document.removeEventListener('keydown', this.handleKeyDown);
     this._isMounted = false;
     clearInterval(this.interval);
+    clearInterval(this.moveBubbleInterval);
   }
 
   render() {

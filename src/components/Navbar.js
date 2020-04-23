@@ -56,6 +56,9 @@ class Navbar extends React.Component {
             <li onClick={this.handleOpenModal} id="experience">
               Experience
             </li>
+            <li>
+              <a href="https://drive.google.com/open?id=116_JSQdIJGzPilGS25Dr0Qrw4xj9q6qd" title="Nitish Resume" target="_blank" rel="noopener noreferrer">Resume</a>
+            </li>
           </ul>
         </nav>
         <ReactModal

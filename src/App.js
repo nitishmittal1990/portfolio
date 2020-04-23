@@ -98,17 +98,20 @@ class App extends React.Component {
           <button onClick={this.handleCloseModal} className="Modal-close">
             X
           </button>
-          <div>
+          <div className="rulesModal">
             <header>
               <h3>Rules</h3>
             </header>
             <section>
               <div className="row">
-                <p>Press Space to Fire</p>
-                <p>Press Right & Left key to move rocket</p>
-                <p>If any obstacle reaches to rocket, Game will be over</p>
+                <ol className="rulesList">
+                  <li>Press Space to Fire</li>
+                  <li>Press Right & Left Key To Move Rocket</li>
+                  <li>If Any Obstacle Reaches To Rocket, Game Will Be Over</li>
+                  <li>For Killing Each Obstacle, You Get 10 points</li>
+                </ol>
               </div>
-              <button onClick={this.handleGameStatus}>Start Game</button>
+              <button onClick={this.handleGameStatus} id="StartGame">Start Game</button>
             </section>
           </div>
         </ReactModal>
