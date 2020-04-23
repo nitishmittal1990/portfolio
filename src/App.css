@@ -1502,6 +1502,10 @@ nav > ul > li:hover {
 .rulesModal .rulesList > li {
   margin: 6px 0;
 }
+.rulesModal .rulesList > li:last-child {
+  font-style: italic;
+  color: red;
+}
 
 #StartGame {
   background-color: #00A289;
