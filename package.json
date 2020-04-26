@@ -14,8 +14,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "cypress:open": "cypress open"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,7 +32,6 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^4.1.0",
     "react-modal": "^3.11.1"
   }
 }
