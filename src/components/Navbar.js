@@ -1,81 +1,77 @@
-import React from 'react';
-import ReactModal from "react-modal";
+import React, { useState } from 'react';
+import ReactModal from 'react-modal';
 
 import AboutModal from './AboutModal.js';
 import ExperienceModal from './ExperienceModal.js';
-import ProjectModal from "./ProjectModal.js";
+import ProjectModal from './ProjectModal.js';
 
+function Navbar() {
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState('');
 
-class Navbar extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      showModal: false,
-      modalType: ''
-    };
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.renderContent = this.renderContent.bind(this);
-  }
+  const handleOpenModal = (e) => {
+    setShowModal(true);
+    setModalType(e.target.id);
+  };
 
-  handleOpenModal(e) {
-    this.setState({ 
-        showModal: true,
-        modalType: e.target.id
-    });
-  }
+  const handleCloseModal = (e) => {
+    setShowModal(false);
+  };
 
-  handleCloseModal() {
-    this.setState({ showModal: false });
-  }
-
-  renderContent() {
-    if(this.state.modalType === 'about') {
-        return <AboutModal />;
+  const renderContent = () => {
+    if (modalType === 'about') {
+      return <AboutModal />;
     }
-    if (this.state.modalType === "project") {
-        return <ProjectModal />;
+    if (modalType === 'project') {
+      return <ProjectModal />;
     }
-    if (this.state.modalType === "experience") {
-        return <ExperienceModal />;
+    if (modalType === 'experience') {
+      return <ExperienceModal />;
     }
     return null;
-  }
+  };
 
-  render() {
-    return (
-      <React.Fragment>
-        <nav>
-          <ul className="nav">
-            <li onClick={this.handleOpenModal} id="about">
-              About Me
-            </li>
-            <li onClick={this.handleOpenModal} id="project">
-              Projects
-            </li>
-            <li onClick={this.handleOpenModal} id="experience">
-              Experience
-            </li>
-            <li>
-              <a href="https://drive.google.com/open?id=116_JSQdIJGzPilGS25Dr0Qrw4xj9q6qd" title="Nitish Resume" target="_blank" rel="noopener noreferrer">Resume</a>
-            </li>
-          </ul>
-        </nav>
-        <ReactModal
-          shouldCloseOnEsc
-          isOpen={this.state.showModal}
-          appElement={document.getElementById("root")}
-          onRequestClose={this.handleCloseModal}
-          contentLabel="About Us Modal"
-          shouldCloseOnOverlayClick={false}
-          className="myModalNitish"
-        >
-          <button onClick={this.handleCloseModal} className='Modal-close'>X</button>
-          {this.renderContent()}
-        </ReactModal>
-      </React.Fragment>
-    );
-  }
+  return (
+    <>
+      <nav>
+        <ul className="nav">
+          <li onClick={handleOpenModal} id="about">
+            About Me
+          </li>
+          <li onClick={handleOpenModal} id="project">
+            Projects
+          </li>
+          <li onClick={handleOpenModal} id="experience">
+            Experience
+          </li>
+          <li>
+            <a
+              href="https://drive.google.com/open?id=116_JSQdIJGzPilGS25Dr0Qrw4xj9q6qd"
+              title="Nitish Resume"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Resume
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <ReactModal
+        shouldCloseOnEsc
+        isOpen={showModal}
+        appElement={document.getElementById('root')}
+        onRequestClose={handleCloseModal}
+        contentLabel="About Us Modal"
+        shouldCloseOnOverlayClick={false}
+        className="myModalNitish"
+      >
+        <button onClick={handleCloseModal} className="Modal-close">
+          X
+        </button>
+        {renderContent()}
+      </ReactModal>
+    </>
+  );
 }
 
 export default Navbar;

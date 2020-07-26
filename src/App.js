@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactModal from "react-modal";
+import ReactModal from 'react-modal';
 
 import Navbar from './components/Navbar.js';
-import Game from './components/Game.js'
+import Game from './components/Game.js';
 
 import './App.css';
 
@@ -23,13 +23,13 @@ class App extends React.Component {
   handleOpenModal(e) {
     this.setState({
       showRuleModal: true,
-      modalType: e.target.id
+      modalType: e.target.id,
     });
   }
 
   handleGameStatus() {
     this.handleCloseModal();
-    this.setState({ isGameStarted: true});
+    this.setState({ isGameStarted: true });
   }
 
   handleCloseModal() {
@@ -37,25 +37,71 @@ class App extends React.Component {
   }
 
   isGameOver = (datafromchild) => {
-    if(datafromchild.isGameOver === false) {
+    if (datafromchild.isGameOver === false) {
       this.setState({
         isGameStarted: false,
         GameOver: true,
-        score: datafromchild.score
+        score: datafromchild.score,
       });
     }
-  }
-
+  };
 
   render() {
     return (
       <div className="App">
-        <ul className='socialIcons'>
-          <li><a href='https://dribbble.com/nitishmittal' target='_blank' rel='noopener noreferrer'><img src={process.env.PUBLIC_URL + "/dribbble.png"} alt='Dribbble logo' title='Dribbble' /></a></li>
-          <li><a href='https://medium.com/@nitishmittal' target='_blank' rel='noopener noreferrer'><img src={process.env.PUBLIC_URL + "/medium.png"} alt='Medium logo' title='Medium' /></a></li>
-          <li><a href='https://twitter.com/nitish_mittal19' target='_blank' rel='noopener noreferrer'><img src={process.env.PUBLIC_URL + "/twitter.png"} alt='Twitter logo' title='Twitter' /></a></li>
-          <li><a href='https://github.com/nitishmittal1990/' target='_blank' rel='noopener noreferrer'><img src={process.env.PUBLIC_URL + "/github.png"} alt='Github logo' title='Github' /></a></li>
-          
+        <ul className="socialIcons">
+          <li>
+            <a
+              href="https://dribbble.com/nitishmittal"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={process.env.PUBLIC_URL + '/dribbble.png'}
+                alt="Dribbble logo"
+                title="Dribbble"
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://medium.com/@nitishmittal"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={process.env.PUBLIC_URL + '/medium.png'}
+                alt="Medium logo"
+                title="Medium"
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://twitter.com/nitish_mittal19"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={process.env.PUBLIC_URL + '/twitter.png'}
+                alt="Twitter logo"
+                title="Twitter"
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/nitishmittal1990/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={process.env.PUBLIC_URL + '/github.png'}
+                alt="Github logo"
+                title="Github"
+              />
+            </a>
+          </li>
         </ul>
         <Navbar />
         <section className="App-section">
@@ -69,14 +115,24 @@ class App extends React.Component {
           </div>
           {this.state.isGameStarted ? null : (
             <div className="myInfo">
-              {this.state.GameOver ? <><h1>Game Over</h1> <p>Your Score: {this.state.score}</p></> : <><h1>Nitish Mittal</h1>
-              <div className='subtext'>i <em>design</em> &amp; <span>develop</span> 
-              <div className='rotateText'>
-                <span>WebApps</span>
-                <span>Websites</span>
-                <span>UI/UX</span>
-                <span>Products</span>
-              </div> </div></> }
+              {this.state.GameOver ? (
+                <>
+                  <h1>Game Over</h1> <p>Your Score: {this.state.score}</p>
+                </>
+              ) : (
+                <>
+                  <h1>Nitish Mittal</h1>
+                  <div className="subtext">
+                    i <em>design</em> &amp; <span>develop</span>
+                    <div className="rotateText">
+                      <span>WebApps</span>
+                      <span>Websites</span>
+                      <span>UI/UX</span>
+                      <span>Products</span>
+                    </div>{' '}
+                  </div>
+                </>
+              )}
               <button
                 className="portfolioBtn"
                 onClick={this.handleOpenModal}
@@ -90,7 +146,7 @@ class App extends React.Component {
         <ReactModal
           shouldCloseOnEsc
           isOpen={this.state.showRuleModal}
-          appElement={document.getElementById("root")}
+          appElement={document.getElementById('root')}
           onRequestClose={this.handleCloseModal}
           contentLabel="About Game Rules"
           shouldCloseOnOverlayClick={false}
@@ -112,7 +168,9 @@ class App extends React.Component {
                   <li>Disclaimer: Game Has Some Issue, Will Be Fixed Soon.</li>
                 </ol>
               </div>
-              <button onClick={this.handleGameStatus} id="StartGame">Start Game</button>
+              <button onClick={this.handleGameStatus} id="StartGame">
+                Start Game
+              </button>
             </section>
           </div>
         </ReactModal>
