@@ -25,9 +25,9 @@ function Navbar() {
     if (modalType === 'project') {
       return <ProjectModal />;
     }
-    if (modalType === 'experience') {
-      return <ExperienceModal />;
-    }
+    // if (modalType === 'experience') {
+    //   return <ExperienceModal />;
+    // }
     return null;
   };
 
@@ -41,12 +41,9 @@ function Navbar() {
           <li onClick={handleOpenModal} id="project">
             Projects
           </li>
-          <li onClick={handleOpenModal} id="experience">
-            Experience
-          </li>
           <li>
             <a
-              href="https://drive.google.com/open?id=116_JSQdIJGzPilGS25Dr0Qrw4xj9q6qd"
+              href="https://drive.google.com/file/d/1rh0lsuoxt7YtS6_AONcBBQLuGFHk5r76/view"
               title="Nitish Resume"
               target="_blank"
               rel="noopener noreferrer"
