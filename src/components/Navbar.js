@@ -41,7 +41,7 @@ function Navbar() {
           <li onClick={handleOpenModal} id="project">
             Projects
           </li>
-          <li>
+          {/* <li>
             <a
               href="https://drive.google.com/file/d/1rh0lsuoxt7YtS6_AONcBBQLuGFHk5r76/view"
               title="Nitish Resume"
@@ -50,7 +50,7 @@ function Navbar() {
             >
               Resume
             </a>
-          </li>
+          </li> */}
         </ul>
       </nav>
       <ReactModal
