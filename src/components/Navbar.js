@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 
 import AboutModal from './AboutModal.js';
-import ExperienceModal from './ExperienceModal.js';
+// import ExperienceModal from './ExperienceModal.js';
 import ProjectModal from './ProjectModal.js';
 
 function Navbar() {
