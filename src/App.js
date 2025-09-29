@@ -123,7 +123,7 @@ class App extends React.Component {
                 <>
                   <h1>Nitish Mittal</h1>
                   <div className="subtext">
-                    i <em>design</em> &amp; <span>develop</span>
+                    I <em>design</em> &amp; <span>develop</span>
                     <div className="rotateText">
                       <span>WebApps</span>
                       <span>Websites</span>

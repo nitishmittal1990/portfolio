@@ -1575,3 +1575,7 @@ nav > ul > li:hover {
     width: 100%;
   }
 }
+
+.tech-used {
+  margin-bottom: 2px;
+}
