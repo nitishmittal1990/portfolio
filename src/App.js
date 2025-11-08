@@ -165,7 +165,6 @@ class App extends React.Component {
                   <li>Press Right & Left Key To Move Rocket.</li>
                   <li>If Any Obstacle Reaches To Rocket, Game Will Be Over.</li>
                   <li>For Killing Each Obstacle, You Get 10 points.</li>
-                  <li>Disclaimer: Game Has Some Issue, Will Be Fixed Soon.</li>
                 </ol>
               </div>
               <button onClick={this.handleGameStatus} id="StartGame">

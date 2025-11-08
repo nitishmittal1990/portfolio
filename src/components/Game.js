@@ -16,8 +16,12 @@ class Game extends React.Component {
     this._isMounted = false;
     this._size = 20;
     this.score = 0;
+
+    const middleRocket = Math.floor(window.innerWidth / (this._size*2));
+    const xordinateRocket = Math.floor(window.innerHeight / this._size) - 4;
+
     this.state = {
-      rocketGrid: [],
+      rocketGrid: [{ x: xordinateRocket, y: middleRocket }],
       bubbleGrid: [],
       fire: []
     };
@@ -32,22 +36,14 @@ class Game extends React.Component {
     this.moverRocketLeft = this.moverRocketLeft.bind(this);
     this.moverRocketRight = this.moverRocketRight.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.formRocketGrid();
-    this.interval = setInterval(() => {
-      this.isDestroyBubble();
-      this.generateBubble();
-      this.moveFire();
-    }, 200);
-    this.moveBubbleInterval = setInterval(() => {
-      this.moveBubble();
-    }, 600);
   }
 
   formRocketGrid() {
     const middleRocket = Math.floor(window.innerWidth / (this._size*2));
     const xordinateRocket = Math.floor(window.innerHeight / this._size) - 4;
-    this.state.rocketGrid.push({ x: xordinateRocket, y: middleRocket });
-    // console.log(this.state.rocketGrid);
+    this.setState({
+      rocketGrid: [{ x: xordinateRocket, y: middleRocket }]
+    });
   }
 
 
@@ -73,8 +69,9 @@ class Game extends React.Component {
 
   fireRocket() {
     const { x: rocketx, y: rockety } = this.state.rocketGrid[0];
-    // console.log(rocketx, rockety);
-    this.state.fire.push({ x: rocketx, y: rockety });
+    this.setState(prevState => ({
+      fire: [...prevState.fire, { x: rocketx, y: rockety }]
+    }));
   }
 
   handleClick(e) {
@@ -108,10 +105,16 @@ class Game extends React.Component {
   }
 
   isGameOverHandle = () => {
-    const isGameOver = this.state.bubbleGrid.every(
-      eachbubble => eachbubble.x < Math.floor(window.innerHeight / this._size) - 8
+    const rocketX = this.state.rocketGrid[0].x;
+    const gameOverThreshold = rocketX - 2;
+
+    const isGameOver = this.state.bubbleGrid.some(
+      eachbubble => eachbubble.x >= gameOverThreshold
     );
-    this.props.isGameOverCallback({ isGameOver: isGameOver, score: this.score});
+
+    if (isGameOver) {
+      this.props.isGameOverCallback({ isGameOver: false, score: this.score});
+    }
   };
 
   moveBubble() {
@@ -153,23 +156,27 @@ class Game extends React.Component {
   }
 
   isDestroyBubble() {
-    const bubbleArray = this.state.bubbleGrid;
-    const fireArray = this.state.fire;
-    if (fireArray.length > 0) {
-      bubbleArray.forEach(element => {
-        // console.log(element, 'bubbleArray');
-        for (let i = 0; i < fireArray.length; i++) {
-          // console.log(fireArray, "bubbleArray");
+    let bubbleArray = [...this.state.bubbleGrid];
+    let fireArray = [...this.state.fire];
+    let scoreIncrement = 0;
 
-          console.log('bubbleArray', element.x, element.y);
-          console.log('fireArray', fireArray[i].x, fireArray[i].y);
-          if (element.x === fireArray[i].x && element.y === fireArray[i].y) {
-            this.score += 10;
+    if (fireArray.length > 0 && bubbleArray.length > 0) {
+      for (let i = fireArray.length - 1; i >= 0; i--) {
+        for (let j = bubbleArray.length - 1; j >= 0; j--) {
+          if (fireArray[i] && bubbleArray[j] &&
+              fireArray[i].x === bubbleArray[j].x &&
+              fireArray[i].y === bubbleArray[j].y) {
+            scoreIncrement += 10;
             fireArray.splice(i, 1);
-            bubbleArray.splice(bubbleArray.indexOf(element), 1);
+            bubbleArray.splice(j, 1);
+            break;
           }
         }
-      });
+      }
+
+      if (scoreIncrement > 0) {
+        this.score += scoreIncrement;
+      }
     }
 
     this._isMounted && this.setState({
@@ -179,10 +186,11 @@ class Game extends React.Component {
   }
 
   generateBubble() {
-    // this.state.bubbleGrid;
     if (this.state.bubbleGrid.length < 3) {
       let y1 = Math.floor(Math.random() * (window.innerWidth / this._size));
-      this.state.bubbleGrid.push({ x: 0, y: y1 });
+      this.setState(prevState => ({
+        bubbleGrid: [...prevState.bubbleGrid, { x: 0, y: y1 }]
+      }));
     }
   }
 
@@ -190,7 +198,16 @@ class Game extends React.Component {
   componentDidMount() {
     this._isMounted = true;
     document.addEventListener("keydown", this.handleKeyDown);
-   
+
+    this.interval = setInterval(() => {
+      this.isDestroyBubble();
+      this.generateBubble();
+      this.moveFire();
+    }, 200);
+
+    this.moveBubbleInterval = setInterval(() => {
+      this.moveBubble();
+    }, 600);
   }
   
   componentWillUnmount() {
