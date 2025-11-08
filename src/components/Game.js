@@ -15,7 +15,6 @@ class Game extends React.Component {
     super(props);
     this._isMounted = false;
     this._size = 20;
-    this.score = 0;
 
     const middleRocket = Math.floor(window.innerWidth / (this._size*2));
     const xordinateRocket = Math.floor(window.innerHeight / this._size) - 4;
@@ -23,7 +22,8 @@ class Game extends React.Component {
     this.state = {
       rocketGrid: [{ x: xordinateRocket, y: middleRocket }],
       bubbleGrid: [],
-      fire: []
+      fire: [],
+      score: 0
     };
 
     this.formRocketGrid = this.formRocketGrid.bind(this);
@@ -113,7 +113,7 @@ class Game extends React.Component {
     );
 
     if (isGameOver) {
-      this.props.isGameOverCallback({ isGameOver: false, score: this.score});
+      this.props.isGameOverCallback({ isGameOver: false, score: this.state.score});
     }
   };
 
@@ -173,16 +173,13 @@ class Game extends React.Component {
           }
         }
       }
-
-      if (scoreIncrement > 0) {
-        this.score += scoreIncrement;
-      }
     }
 
-    this._isMounted && this.setState({
+    this._isMounted && this.setState(prevState => ({
       bubbleGrid: bubbleArray,
-      fire: fireArray
-    });
+      fire: fireArray,
+      score: prevState.score + scoreIncrement
+    }));
   }
 
   generateBubble() {
@@ -271,6 +268,17 @@ class Game extends React.Component {
     return (
       <React.Fragment>
         {bubbleObject}
+        <div className="scoreDisplay" style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          color: 'white',
+          fontSize: '24px',
+          fontWeight: 'bold',
+          zIndex: 1000
+        }}>
+          Score: {this.state.score}
+        </div>
         <div className="arrows">
           <button className="smallBtn" onClick={this.handleClick} value="left">
             Left
